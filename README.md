@@ -34,3 +34,20 @@ ffmpeg -f concat -safe 0 -i mylist.txt -c output.mkv
 ```
 The -safe 0 above is not required if the paths are relative.
 
+
+## MP4BOX commands
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
