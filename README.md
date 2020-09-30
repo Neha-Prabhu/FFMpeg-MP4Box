@@ -39,9 +39,9 @@ The -safe 0 above is not required if the paths are relative.
 
 ### mp4Box command to dashify
 ```
-MP4Box -dash 25000 -segment-name myseg_%s -url-template -out final.mpd output.mp4#video  output.mp4#audio
-```
+MP4Box -dash 4000 -frag 4000 -rap -segment-name segment_%s -url-template -out final_dash.mpd output.mp4#video  output.mp4#audio
 
+```
 
 
 
