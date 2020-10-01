@@ -34,6 +34,21 @@ ffmpeg -f concat -safe 0 -i mylist.txt -c output.mkv
 ```
 The -safe 0 above is not required if the paths are relative.
 
+### To extract audio stream 
+```
+ ffmpeg -i sample.mp4 -c:a copy -vn audio.mp4
+```
+### Commands to convert videos into different resolutions
+```
+ffmpeg -i sample.mp4 -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 5300k -maxrate 5300k -bufsize 2650k -vf 'scale=-1:1080' video-1080.mp4
+ffmpeg -i sample.mp4 -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 2400k -maxrate 2400k -bufsize 1200k -vf 'scale=-1:720' video-720.mp4
+ffmpeg -i sample.mp4 -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 1060k -maxrate 1060k -bufsize 530k -vf 'scale=-1:478' video-480.mp4
+ffmpeg -i sample.mp4 -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 600k -maxrate 600k -bufsize 300k -vf 'scale=-1:360' video-360.mp4
+ffmpeg -i sample.mp4 -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 260k -maxrate 260k -bufsize 130k -vf 'scale=-1:242' video-240.mp4
+ffmpeg -i sample.mp4 -an -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 160k -maxrate 160k -bufsize 80k -vf 'scale=-1:144' video-144.mp4
+
+```
+
 
 ## MP4BOX commands
 
@@ -42,6 +57,14 @@ The -safe 0 above is not required if the paths are relative.
 MP4Box -dash 4000 -frag 4000 -rap -segment-name segment_%s -url-template -out final_dash.mpd output.mp4#video  output.mp4#audio
 
 ```
+
+### mp4Box command to dashify video of different resolutions
+```
+MP4Box -dash 4000 -frag 4000 -rap -segment-name seg_%s -url-template -out sample_dash.mpd video-1080.mp4 video-720.mp4 video-480.mp4 video-360.mp4 video-240.mp4 video-144.mp4 audio.mp4
+```
+mp4box and mediaplayers do not accept multiplexed steams thus always seperate audi and video using ffmpeg.
+
+
 
 
 
